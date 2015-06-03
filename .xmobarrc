@@ -1,0 +1,19 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW L 100
+       , commands = [ Run Weather "KARB" ["-t"," <tempF>F","-L","64","-H","77","--normal","green","--high","red","--low","lightblue"] 6000
+                    , Run Date "%a %b %_d %l:%M" "date" 100
+                    , Run Battery ["-t","<acstatus> (<left>%)","-p","3"
+                                  ,  "-L","10","-H","80"
+                                  ,  "--","-O","<fc=green>On</fc> - ","-i", ""
+                                  ,  "-L","-15","-H","-5","-l","red","-m","blue"
+                                  ,  "-h","green"
+                                  ] 600
+                    , Run Com "sh" ["/home/greg/.xmonad/volume.sh"] "vol" 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ | %vol% | %battery% | <fc=#ee9a00>%date%</fc> | %KARB%"
+       }
